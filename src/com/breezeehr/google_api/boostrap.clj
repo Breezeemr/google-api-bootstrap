@@ -17,19 +17,19 @@
       :query-params options}
      (assoc :throw-exceptions false
             ;:aleph/save-request-message lastmessage
-            :as :json)
+            :as :json-string-keys)
      http/request
      deref
      :body
-     :items)))
+     (get "items"))))
 
-(defn get-discovery [client {:keys [discoveryRestUrl] :as discovery-ref}]
+(defn get-discovery [client {:strs [discoveryRestUrl] :as discovery-ref}]
   (-> {:method :get
        :url    discoveryRestUrl}
       ;(add-auth client)
       (assoc :throw-exceptions false
              ;:aleph/save-request-message lastmessage
-             :as :json)
+             :as :json-string-keys)
       http/request
       deref
       :body))
